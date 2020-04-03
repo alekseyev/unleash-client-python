@@ -8,6 +8,7 @@ class RemoteAddress(Strategy):
         parsed_ips = []
 
         for address in self.parameters["IPs"].split(','):
+            address = unicode(address)
 
             if "/" in address:
                 try:
@@ -31,7 +32,7 @@ class RemoteAddress(Strategy):
         return_value = False
 
         try:
-            context_ip = ipaddress.ip_address(context["remoteAddress"])
+            context_ip = ipaddress.ip_address(unicode(context["remoteAddress"]))
         except (ipaddress.AddressValueError, ipaddress.NetmaskValueError, ValueError) as parsing_error:
             LOGGER.warning("Error parsing IP : %s", parsing_error)
             context_ip = None

@@ -34,7 +34,7 @@ def register_client(url,
         "appName": app_name,
         "instanceId": instance_id,
         "sdkVersion": "{}:{}".format(SDK_NAME, SDK_VERSION),
-        "strategies": supported_strategies[:],
+        "strategies": supported_strategies.keys(),
         "started": datetime.now(pytz.utc).isoformat(),
         "interval": metrics_interval
     }

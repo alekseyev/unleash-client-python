@@ -33,7 +33,7 @@ def aggregate_and_send_metrics(url,
         "bucket": {
             "start": ondisk_cache[METRIC_LAST_SENT_TIME].isoformat(),
             "stop": datetime.now(pytz.utc).isoformat(),
-            "chainmap": dict(ChainMap(*feature_stats_list))
+            "toggles": dict(ChainMap(*feature_stats_list))
         }
     }
 
