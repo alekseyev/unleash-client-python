@@ -1,6 +1,5 @@
 import random
 import copy
-from typing import Dict
 from UnleashClient import utils
 from UnleashClient.constants import DISABLED_VARIATION
 
