@@ -1,6 +1,5 @@
-from datetime import datetime, timezone
-from typing import Dict, Callable, Any
-import copy
+from datetime import datetime
+import pytz
 from fcache.cache import FileCache
 from apscheduler.job import Job
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -21,18 +20,18 @@ class UnleashClient():
 
     """
     def __init__(self,
-                 url: str,
-                 app_name: str,
-                 environment: str = "default",
-                 instance_id: str = "unleash-client-python",
-                 refresh_interval: int = 15,
-                 metrics_interval: int = 60,
-                 disable_metrics: bool = False,
-                 disable_registration: bool = False,
-                 custom_headers: dict = {},
-                 custom_options: dict = {},
-                 custom_strategies: dict = {},
-                 cache_directory: str = None) -> None:
+                 url,
+                 app_name,
+                 environment="default",
+                 instance_id="unleash-client-python",
+                 refresh_interval=15,
+                 metrics_interval=60,
+                 disable_metrics=False,
+                 disable_registration=False,
+                 custom_headers={},
+                 custom_options={},
+                 custom_strategies={},
+                 cache_directory=None):
         """
         A client for the Unleash feature toggle system.
 
@@ -70,7 +69,7 @@ class UnleashClient():
         self.scheduler = BackgroundScheduler()
         self.fl_job = None  # type: Job
         self.metric_job = None  # type: Job
-        self.cache[METRIC_LAST_SENT_TIME] = datetime.now(timezone.utc)
+        self.cache[METRIC_LAST_SENT_TIME] = datetime.now(pytz.utc)
         self.cache.sync()
 
         # Mappings
@@ -88,12 +87,12 @@ class UnleashClient():
         if custom_strategies:
             strategy_v2xx_deprecation_check([x for x in custom_strategies.values()])  # pylint: disable=R1721
 
-        self.strategy_mapping = {**custom_strategies, **default_strategy_mapping}
+        self.strategy_mapping = dict(custom_strategies, **default_strategy_mapping)
 
         # Client status
         self.is_initialized = False
 
-    def initialize_client(self) -> None:
+    def initialize_client(self):
         """
         Initializes client and starts communication with central unleash server(s).
 
@@ -162,7 +161,7 @@ class UnleashClient():
         self.cache.delete()
 
     @staticmethod
-    def _get_fallback_value(default_value: bool, fallback_function: Callable, feature_name: str, context: dict) -> bool:
+    def _get_fallback_value(default_value, fallback_function, feature_name, context):
         if fallback_function:
             fallback_value = default_value or fallback_function(feature_name, context)
         else:
@@ -172,10 +171,10 @@ class UnleashClient():
 
     # pylint: disable=broad-except
     def is_enabled(self,
-                   feature_name: str,
-                   context: dict = {},
-                   default_value: bool = False,
-                   fallback_function: Callable = None) -> bool:
+                   feature_name,
+                   context={},
+                   default_value=False,
+                   fallback_function=None):
         """
         Checks if a feature toggle is enabled.
 
@@ -205,8 +204,8 @@ class UnleashClient():
 
     # pylint: disable=broad-except
     def get_variant(self,
-                    feature_name: str,
-                    context: dict = {}) -> dict:
+                    feature_name,
+                    context={}):
         """
         Checks if a feature toggle is enabled.  If so, return variant.
 

@@ -3,13 +3,14 @@ requests==2.23.0
 fcache==0.4.7
 mmh3==2.5.1
 APScheduler==3.6.3
+ipaddress==1.0.23
+pytz==2019.3
+chainmap==1.0.3
 
 # Development packages
 bumpversion
 coveralls
-mimesis==2.1.0
 mkdocs
-mypy
 pur
 pylint
 pytest

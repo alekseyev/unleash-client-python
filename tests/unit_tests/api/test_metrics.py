@@ -17,7 +17,7 @@ FULL_METRICS_URL = URL + METRICS_URL
     param({"body": ConnectionError("Test connection error.")}, 200, lambda result: not result, id="exception"),
 ))
 def test_send_metrics(payload, status, expected):
-    responses.add(responses.POST, FULL_METRICS_URL, **payload, status=status)
+    responses.add(responses.POST, FULL_METRICS_URL, status=status, **payload)
 
     result = send_metrics(URL, MOCK_METRICS_REQUEST, CUSTOM_HEADERS, CUSTOM_OPTIONS)
 

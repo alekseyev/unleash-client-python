@@ -1,23 +1,20 @@
-import mimesis
-
-
 def generate_context():
-    return {"userId": mimesis.Person('en').email()}
+    return {"userId": 'test@test.zakaz.ua'}
 
 
-def generate_email_list(num: int) -> (str, dict):
+def generate_email_list(num):
     """
     Generates an unleash-style list of emails for testing.
 
     :param num:
     :return:
     """
-    first_email = mimesis.Person('en').email()
+    first_email = 'test@test.zakaz.ua'
     email_list_string = first_email
 
     context = {"userId": first_email}
 
-    for _ in range(num - 1):
-        email_list_string += "," + mimesis.Person('en').email()
+    for i in range(num - 1):
+        email_list_string += "," + 'test_%d@test.zakaz.ua' % i
 
     return (email_list_string, context)

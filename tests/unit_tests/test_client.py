@@ -12,10 +12,10 @@ from UnleashClient.constants import REGISTER_URL, FEATURES_URL, METRICS_URL
 
 
 class EnvironmentStrategy(Strategy):
-    def load_provisioning(self) -> list:
+    def load_provisioning(self):
         return [x.strip() for x in self.parameters["environments"].split(',')]
 
-    def apply(self, context: dict = None) -> bool:
+    def apply(self, context = None):
         """
         Turn on if environemnt is a match.
 
@@ -137,13 +137,13 @@ def test_uc_is_enabled(unleash_client):
 
 @responses.activate
 def test_uc_fallbackfunction(unleash_client, mocker):
-    def good_fallback(feature_name: str, context: dict) -> bool:
+    def good_fallback(feature_name, context):
         return True
 
-    def bad_fallback(feature_name: str, context: dict) -> bool:
+    def bad_fallback(feature_name, context):
         return False
 
-    def context_fallback(feature_name: str, context: dict) -> bool:
+    def context_fallback(feature_name, context):
         return context['wat']
 
     # Set up API

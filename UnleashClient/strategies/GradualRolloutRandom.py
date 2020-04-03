@@ -3,7 +3,7 @@ from UnleashClient.strategies.Strategy import Strategy
 
 
 class GradualRolloutRandom(Strategy):
-    def apply(self, context: dict = None) -> bool:
+    def apply(self, context=None):
         """
         Returns random assignment.
 

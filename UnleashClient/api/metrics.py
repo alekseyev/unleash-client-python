@@ -5,10 +5,10 @@ from UnleashClient.utils import LOGGER
 
 
 # pylint: disable=broad-except
-def send_metrics(url: str,
-                 request_body: dict,
-                 custom_headers: dict,
-                 custom_options: dict) -> bool:
+def send_metrics(url,
+                 request_body,
+                 custom_headers,
+                 custom_options):
     """
     Attempts to send metrics to Unleash server
 
@@ -29,7 +29,7 @@ def send_metrics(url: str,
 
         resp = requests.post(url + METRICS_URL,
                              data=json.dumps(request_body),
-                             headers={**custom_headers, **APPLICATION_HEADERS},
+                             headers=dict(custom_headers, **APPLICATION_HEADERS),
                              timeout=REQUEST_TIMEOUT, **custom_options)
 
         if resp.status_code != 202:

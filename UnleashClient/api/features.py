@@ -4,11 +4,11 @@ from UnleashClient.utils import LOGGER
 
 
 # pylint: disable=broad-except
-def get_feature_toggles(url: str,
-                        app_name: str,
-                        instance_id: str,
-                        custom_headers: dict,
-                        custom_options: dict) -> dict:
+def get_feature_toggles(url,
+                        app_name,
+                        instance_id,
+                        custom_headers,
+                        custom_options):
     """
     Retrieves feature flags from unleash central server.
 
@@ -30,9 +30,10 @@ def get_feature_toggles(url: str,
             "UNLEASH-APPNAME": app_name,
             "UNLEASH-INSTANCEID": instance_id
         }
+        headers.update(custom_headers)
 
         resp = requests.get(url + FEATURES_URL,
-                            headers={**custom_headers, **headers},
+                            headers=headers,
                             timeout=REQUEST_TIMEOUT, **custom_options)
 
         if resp.status_code != 200:

@@ -2,7 +2,7 @@ import warnings
 from UnleashClient.strategies import Strategy
 
 
-def strategy_v2xx_deprecation_check(strategies: list) -> None:
+def strategy_v2xx_deprecation_check(strategies):
     """
     Notify users of backwards incompatible changes in v3 for custom strategies.
     """

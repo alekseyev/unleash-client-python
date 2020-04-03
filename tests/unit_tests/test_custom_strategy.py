@@ -8,10 +8,10 @@ from UnleashClient.constants import REGISTER_URL, FEATURES_URL, METRICS_URL
 
 
 class CatTest(Strategy):
-    def load_provisioning(self) -> list:
+    def load_provisioning(self):
         return [x.strip() for x in self.parameters["sound"].split(',')]
 
-    def apply(self, context: dict = None) -> bool:
+    def apply(self, context=None):
         """
         Turn on if I'm a cat.
 
@@ -26,10 +26,10 @@ class CatTest(Strategy):
 
 
 class DogTest(StrategyOldV2):
-    def load_provisioning(self) -> list:
+    def load_provisioning(self):
         return [x.strip() for x in self.parameters["sound"].split(',')]
 
-    def _call_(self, context: dict = None) -> bool:
+    def _call_(self, context=None):
         """
         Turn on if I'm a dog.
 

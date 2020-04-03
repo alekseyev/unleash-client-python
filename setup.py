@@ -21,17 +21,11 @@ setup(
     install_requires=["requests==2.23.0",
                       "fcache==0.4.7",
                       "mmh3==2.5.1",
-                      "apscheduler==3.6.3"],
-    tests_require=['pytest', "mimesis", "responses", 'pytest-mock'],
+                      "apscheduler==3.6.3",
+                      "ipaddress==1.0.23",
+                      "pytz==2019.3",
+                      "chainmap==1.0.3"],
+    tests_require=['pytest', "responses", 'pytest-mock'],
     zip_safe=False,
     include_package_data=True,
-    classifiers=[
-        "Development Status :: 5 - Production/Stable",
-        "Intended Audience :: Developers",
-        "License :: OSI Approved :: MIT License",
-        "Programming Language :: Python :: 3.5",
-        "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7",
-        "Programming Language :: Python :: 3.8"
-    ]
 )

@@ -5,14 +5,14 @@ from UnleashClient.constants import FEATURES_URL
 from UnleashClient.utils import LOGGER
 
 
-def fetch_and_load_features(url: str,
-                            app_name: str,
-                            instance_id: str,
-                            custom_headers: dict,
-                            custom_options: dict,
-                            cache: FileCache,
-                            features: dict,
-                            strategy_mapping: dict) -> None:
+def fetch_and_load_features(url,
+                            app_name,
+                            instance_id,
+                            custom_headers,
+                            custom_options,
+                            cache,
+                            features,
+                            strategy_mapping):
     feature_provisioning = get_feature_toggles(url, app_name, instance_id, custom_headers, custom_options)
 
     if feature_provisioning:

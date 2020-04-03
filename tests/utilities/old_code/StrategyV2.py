@@ -8,7 +8,7 @@ class StrategyOldV2():
     * load_provisioning - Loads strategy provisioning
     """
     def __init__(self,
-                 parameters: dict = {}) -> None:
+                 parameters={}):
         """
         A generic strategy objects.
         :param parameters: 'parameters' key from strategy section (...from feature section) of
@@ -20,7 +20,7 @@ class StrategyOldV2():
         self.parsed_provisioning = self.load_provisioning()
 
     # pylint: disable=no-self-use
-    def load_provisioning(self) -> list:
+    def load_provisioning(self):
         """
         Method to load data on object initialization, if desired.
         This should parse the raw values in self.parameters into format Python can comprehend.
@@ -30,7 +30,7 @@ class StrategyOldV2():
     def __eq__(self, other):
         return self.parameters == other.parameters
 
-    def __call__(self, context: dict = None) -> bool:
+    def __call__(self, contex=None):
         """
         Strategy implementation goes here.
         :param context: Context information

@@ -5,10 +5,10 @@ from UnleashClient.utils import normalized_hash
 
 class FlexibleRollout(Strategy):
     @staticmethod
-    def random_hash() -> int:
+    def random_hash():
         return random.randint(1, 100)
 
-    def apply(self, context: dict = None) -> bool:
+    def apply(self, context=None):
         """
         If constraints are satisfied, return a percentage rollout on provisioned.
 

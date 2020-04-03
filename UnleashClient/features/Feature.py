@@ -6,10 +6,10 @@ from UnleashClient.constants import DISABLED_VARIATION
 # pylint: disable=dangerous-default-value, broad-except
 class Feature:
     def __init__(self,
-                 name: str,
-                 enabled: bool,
-                 strategies: list,
-                 variants: Variants = None) -> None:
+                 name,
+                 enabled,
+                 strategies,
+                 variants=None):
         """
         An representation of a fewature object
 
@@ -27,7 +27,7 @@ class Feature:
         self.yes_count = 0
         self.no_count = 0
 
-    def reset_stats(self) -> None:
+    def reset_stats(self):
         """
         Resets stats after metrics reporting
 
@@ -36,7 +36,7 @@ class Feature:
         self.yes_count = 0
         self.no_count = 0
 
-    def increment_stats(self, result: bool) -> None:
+    def increment_stats(self, result):
         """
         Increments stats.
 
@@ -49,8 +49,8 @@ class Feature:
             self.no_count += 1
 
     def is_enabled(self,
-                   context: dict = None,
-                   default_value: bool = False) -> bool:
+                   context=None,
+                   default_value=False):
         """
         Checks if feature is enabled.
 
@@ -79,7 +79,7 @@ class Feature:
         return flag_value
 
     def get_variant(self,
-                    context: dict = None) -> dict:
+                    context=None):
         """
         Checks if feature is enabled and, if so, get the variant.
 

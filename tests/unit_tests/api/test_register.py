@@ -16,7 +16,7 @@ FULL_REGISTER_URL = URL + REGISTER_URL
     param({"body": ConnectionError("Test connection error")}, 200, False, id="exception"),
 ))
 def test_register_client(payload, status, expected):
-    responses.add(responses.POST, FULL_REGISTER_URL, **payload, status=status)
+    responses.add(responses.POST, FULL_REGISTER_URL, status=status, **payload)
 
     result = register_client(URL,
                              APP_NAME,

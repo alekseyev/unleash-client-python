@@ -1,7 +1,7 @@
 from UnleashClient.utils import LOGGER, get_identifier
 
 class Constraint:
-    def __init__(self, constraint_dict: dict) -> None:
+    def __init__(self, constraint_dict):
         """
         Represents a constraint on a strategy
 
@@ -11,7 +11,7 @@ class Constraint:
         self.operator = constraint_dict['operator']
         self.values = constraint_dict['values']
 
-    def apply(self, context: dict = None) -> bool:
+    def apply(self, context=None):
         """
         Returns true/false depending on constraint provisioning and context.
 

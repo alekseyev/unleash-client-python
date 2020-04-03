@@ -6,7 +6,7 @@ from UnleashClient.constants import DISABLED_VARIATION
 
 
 class Variants():
-    def __init__(self, variants_list: list, feature_name: str) -> None:
+    def __init__(self, variants_list, feature_name):
         """
         Represents an A/B test
 
@@ -15,7 +15,7 @@ class Variants():
         self.variants = variants_list
         self.feature_name = feature_name
 
-    def _apply_overrides(self, context: dict) -> dict:
+    def _apply_overrides(self, context):
         """
         Figures out if an override should be applied based on a context.
 
@@ -34,7 +34,7 @@ class Variants():
         return override_variant
 
     @staticmethod
-    def _get_seed(context: dict) -> str:
+    def _get_seed(context):
         """
         Grabs seed value from context.
         """
@@ -50,14 +50,14 @@ class Variants():
         return seed
 
     @staticmethod
-    def _format_variation(variation: dict) -> dict:
+    def _format_variation(variation):
         formatted_variation = copy.deepcopy(variation)
         del formatted_variation['weight']
         if 'overrides' in formatted_variation:
             del formatted_variation['overrides']
         return formatted_variation
 
-    def get_variant(self, context: dict) -> dict:
+    def get_variant(self, context):
         """
         Determines what variation a user is in.
 

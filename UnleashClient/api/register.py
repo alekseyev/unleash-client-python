@@ -1,18 +1,19 @@
 import json
-from datetime import datetime, timezone
+from datetime import datetime
+import pytz
 import requests
 from UnleashClient.constants import SDK_NAME, SDK_VERSION, REQUEST_TIMEOUT, APPLICATION_HEADERS, REGISTER_URL
 from UnleashClient.utils import LOGGER
 
 
 # pylint: disable=broad-except
-def register_client(url: str,
-                    app_name: str,
-                    instance_id: str,
-                    metrics_interval: int,
-                    custom_headers: dict,
-                    custom_options: dict,
-                    supported_strategies: dict) -> bool:
+def register_client(url,
+                    app_name,
+                    instance_id,
+                    metrics_interval,
+                    custom_headers,
+                    custom_options,
+                    supported_strategies):
     """
     Attempts to register client with unleash server.
 
@@ -33,8 +34,8 @@ def register_client(url: str,
         "appName": app_name,
         "instanceId": instance_id,
         "sdkVersion": "{}:{}".format(SDK_NAME, SDK_VERSION),
-        "strategies": [*supported_strategies],
-        "started": datetime.now(timezone.utc).isoformat(),
+        "strategies": supported_strategies[:],
+        "started": datetime.now(pytz.utc).isoformat(),
         "interval": metrics_interval
     }
 
@@ -44,7 +45,7 @@ def register_client(url: str,
 
         resp = requests.post(url + REGISTER_URL,
                              data=json.dumps(registation_request),
-                             headers={**custom_headers, **APPLICATION_HEADERS},
+                             headers=dict(custom_headers, **APPLICATION_HEADERS),
                              timeout=REQUEST_TIMEOUT, **custom_options)
 
         if resp.status_code != 202:

@@ -4,7 +4,7 @@ from UnleashClient.utils import LOGGER
 
 
 class RemoteAddress(Strategy):
-    def load_provisioning(self) -> list:
+    def load_provisioning(self):
         parsed_ips = []
 
         for address in self.parameters["IPs"].split(','):
@@ -22,7 +22,7 @@ class RemoteAddress(Strategy):
 
         return parsed_ips
 
-    def apply(self, context: dict = None) -> bool:
+    def apply(self, context=None):
         """
         Returns true if IP is in list of IPs
 
